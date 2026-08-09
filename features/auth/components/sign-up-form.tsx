@@ -16,7 +16,7 @@ export function SignUpForm() {
     formState: { errors, isSubmitting },
   } = useForm<SignUpValues>({ resolver: zodResolver(signUpSchema) })
 
-  async function onSubmit(_values: SignUpValues) {
+  async function onSubmit() {
     // TODO: wire up to POST /auth/sign-up via apiClient once the backend exists
   }
 

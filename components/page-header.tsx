@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { Button } from "./ui/button";
-import { Beef, Bell } from "lucide-react";
+import { Bell } from "lucide-react";
 
 type PageHeaderProps = {
   title: string;
@@ -22,15 +22,15 @@ const timeFormatter = new Intl.DateTimeFormat("en-US", {
 });
 
 function HeaderClock() {
-  const [now, setNow] = useState<Date | null>(null);
+  const [now, setNow] = useState<Date>(() => new Date());
 
   useEffect(() => {
-    setNow(new Date());
-    const id = setInterval(() => setNow(new Date()), 1000);
+    const id = setInterval(() => {
+      setNow(new Date());
+    }, 1000);
+
     return () => clearInterval(id);
   }, []);
-
-  if (!now) return null;
 
   return (
     <div className="hidden items-center gap-2 text-sm text-muted-foreground sm:flex">
