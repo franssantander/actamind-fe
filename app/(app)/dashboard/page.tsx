@@ -8,10 +8,7 @@ import { QuickCapture } from "@/features/dashboard/components/quick-capture";
 export default function DashboardPage() {
   return (
     <>
-      <PageHeader
-        title="Dashboard"
-        description="A quick look across your workspace."
-      />
+      <PageHeader description="A quick look across your workspace." />
       <div className="flex flex-col gap-6 px-6 py-6 sm:px-8">
         <QuickCapture />
         <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">

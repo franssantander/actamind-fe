@@ -3,9 +3,10 @@
 import { useEffect, useState } from "react";
 import { Button } from "./ui/button";
 import { Bell } from "lucide-react";
+import { getPageTitle } from "@/features/dashboard/config/nav-items";
+import { usePathname } from "next/navigation";
 
 type PageHeaderProps = {
-  title: string;
   description?: string;
   action?: React.ReactNode;
 };
@@ -23,14 +24,20 @@ const timeFormatter = new Intl.DateTimeFormat("en-US", {
 
 function HeaderClock() {
   const [now, setNow] = useState<Date>(() => new Date());
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
     const id = setInterval(() => {
       setNow(new Date());
     }, 1000);
 
     return () => clearInterval(id);
   }, []);
+
+  if (!mounted) {
+    return <div className="hidden h-5 w-32 sm:block" />;
+  }
 
   return (
     <div className="hidden items-center gap-2 text-sm text-muted-foreground sm:flex">
@@ -43,12 +50,13 @@ function HeaderClock() {
   );
 }
 
-export function PageHeader({ title, description, action }: PageHeaderProps) {
+export function PageHeader({ description, action }: PageHeaderProps) {
+  const pathname = usePathname();
   return (
-    <div className="flex flex-wrap items-start justify-between gap-x-4 gap-y-3 border-b border-border/60 py-4 pl-16 pr-4 sm:px-8 sm:py-5 md:pl-8">
-      <div className="flex min-w-0 flex-col gap-1">
+    <div className="sticky top-0 bg-background flex flex-wrap items-center justify-between gap-x-4 gap-y-3 border-b border-border/60 py-4 pl-16 pr-4 sm:px-8 md:pl-8">
+      <div className="flex min-w-0 flex-col">
         <h1 className="truncate text-xl font-semibold tracking-tight">
-          {title}
+          {getPageTitle(pathname)}
         </h1>
         {description && (
           <p className="truncate text-sm text-muted-foreground">

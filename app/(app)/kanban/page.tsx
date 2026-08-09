@@ -8,8 +8,6 @@ export default function KanbanPage() {
   return (
     <>
       <PageHeader
-        title="Kanban"
-        description="Backlog, in progress, and done."
         action={
           <Button size="sm">
             <Plus />

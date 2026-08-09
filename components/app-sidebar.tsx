@@ -4,28 +4,12 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import {
-  KanbanSquare,
-  LayoutDashboard,
-  Menu,
-  NotebookPen,
-  PanelLeftClose,
-  PanelLeftOpen,
-  Rss,
-  Settings,
-  X,
-} from "lucide-react";
+import { Menu, PanelLeftClose, PanelLeftOpen, Settings, X } from "lucide-react";
 
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { cn } from "@/lib/utils";
 import { Button } from "./ui/button";
-
-const NAV_ITEMS = [
-  { label: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
-  { label: "Kanban", href: "/kanban", icon: KanbanSquare },
-  { label: "Journal", href: "/journal", icon: NotebookPen },
-  { label: "Publish", href: "/publish", icon: Rss },
-];
+import { navItems } from "@/features/dashboard/config/nav-items";
 
 export function AppSidebar() {
   const pathname = usePathname();
@@ -113,7 +97,7 @@ export function AppSidebar() {
           </div>
 
           <nav className="flex flex-1 flex-col gap-1 px-3 py-2">
-            {NAV_ITEMS.map((item) => {
+            {navItems.map((item) => {
               const active = pathname?.startsWith(item.href);
               return (
                 <Link

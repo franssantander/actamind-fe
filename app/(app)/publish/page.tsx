@@ -8,7 +8,6 @@ export default function PublishPage() {
   return (
     <>
       <PageHeader
-        title="Publish"
         description="Draft and published posts."
         action={
           <Button size="sm">
